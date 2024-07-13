@@ -1,0 +1,53 @@
+package view
+
+import "fmt"
+
+templ Base() {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link rel="stylesheet" href="/static/styles/main.css"/>
+			<title>Document</title>
+		</head>
+		<body class="bg-black text-white">
+			<div id="wrapper">
+				{ children... }
+			</div>
+		</body>
+	</html>
+}
+
+templ IndexView(quotes []string) {
+	@Base() {
+		<div class="flex flex-col items-center px-10 pt-20">
+			@IndexTitle()
+			@IndexQuotes(quotes)
+		</div>
+	}
+}
+
+templ IndexTitle() {
+	<h1 class="text-4xl font-bold mb-20">
+		<span class="text-green-500">Me</span>mento 
+		<span class="text-green-500">mori</span>
+	</h1>
+}
+
+templ IndexQuotes(quotes []string) {
+	for i, quote := range quotes {
+		@IndexQuote(i, quote)
+	}
+}
+
+templ IndexQuote(index int, quote string) {
+	<div class="border-y w-full py-6 px-4 flex flex-col items-center gap-4">
+		<h2 class="text-2xl font-bold">
+			{ fmt.Sprintf("0x%x", index) }
+		</h2>
+		<p class="text-xl text-center">
+			{ quote }
+		</p>
+	</div>
+}
