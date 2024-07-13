@@ -1,2 +1,2 @@
-# memori
+# MEmento MORI
 personal meditation web site
